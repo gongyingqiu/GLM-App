@@ -9,8 +9,11 @@ app_dir <- normalizePath(if (length(args)) args[1] else getwd(), winslash = "/")
 lock <- file.path(app_dir, "renv.lock")
 if (!file.exists(lock)) stop("renv.lock not found in ", app_dir)
 
-# Posit Package Manager serves ready-built Windows packages, including older versions
-options(repos = c(CRAN = "https://packagemanager.posit.co/cran/latest"))
+# A dated snapshot of CRAN from Posit Package Manager. Ready-built (binary) Windows packages exist
+# only for the versions that were current on that date, so the date is chosen to match renv.lock:
+# then nothing needs compiling and Rtools is not needed. Update it whenever renv.lock is re-made.
+snapshot <- "2024-10-28"
+options(repos = c(CRAN = paste0("https://packagemanager.posit.co/cran/", snapshot)))
 
 r_ver <- paste(R.version$major, strsplit(R.version$minor, ".", fixed = TRUE)[[1]][1], sep = ".")
 lib <- file.path(tools::R_user_dir("GLM_UI", "cache"), "library", paste0("R-", r_ver))
@@ -27,13 +30,16 @@ if (!identical(lf$R$Version, as.character(getRversion())))
 
 # install anything missing or at a different version, then start the app
 pk <- lf$Packages
+pk <- pk[setdiff(names(pk), "renv")]   # renv only installs the others; its own version does not matter
 wrong <- names(pk)[!vapply(names(pk), function(n) {
   v <- tryCatch(packageVersion(n, lib.loc = .libPaths()), error = function(e) NULL)
   !is.null(v) && v == package_version(pk[[n]]$Version)
 }, logical(1))]
 if (length(wrong)) {
-  message("Installing ", length(wrong), " package(s) at the versions in renv.lock: ", paste(wrong, collapse = ", "))
-  renv::restore(lockfile = lock, library = lib, packages = wrong, prompt = FALSE, clean = FALSE)
+  message("First start: installing ", length(wrong), " package(s) at the versions in renv.lock. ",
+          "This takes a few minutes; the screen may look still while files download.")
+  renv::restore(lockfile = lock, library = lib, packages = wrong, repos = getOption("repos"),
+                prompt = FALSE, clean = FALSE)
 }
 
 message("Starting the GLM tool. Close this window to stop it.")
