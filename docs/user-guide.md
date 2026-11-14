@@ -82,7 +82,7 @@ separate adjustment for one group of ages.
 | System | How |
 |---|---|
 | Windows | Double-click `run_app.bat`. It expects R at `C:\Program Files\R\R-4.4.1`; edit the path at the top of the file if R is installed elsewhere. |
-| macOS / Linux | In a terminal: `Rscript run_app.R /path/to/glm-modelling-studio` |
+| macOS / Linux | In a terminal: `Rscript run_app.R /path/to/GLM-App` |
 | RStudio | Open `App.Rproj` and run `shiny::runApp()` (uses your own installed packages). |
 
 The launcher installs the exact package versions from `renv.lock` into a private library

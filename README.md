@@ -29,18 +29,18 @@ connection for the first start. RStudio is optional.
 
 1. Download this repository (**Code › Download ZIP**, then unzip) or clone it:
    ```bash
-   git clone https://github.com/<your-account>/glm-modelling-studio.git
+   git clone https://github.com/gongyingqiu/GLM-App.git
    ```
 2. Start the app:
    - **Windows:** double-click `run_app.bat`.
-   - **macOS / Linux:** `Rscript run_app.R /path/to/glm-modelling-studio`
+   - **macOS / Linux:** `Rscript run_app.R /path/to/GLM-App`
 3. The app opens in your web browser. Load `demo/motor_premiums.rds` on the **Data › Import** tab and follow
    the worked example in the [user guide](docs/user-guide.md).
 
 The first start installs the exact package versions listed in `renv.lock` into a private library, which takes
 a few minutes. Your own R library is not used or changed, and later starts are immediate.
 
-Already have the packages? Then `shiny::runApp("path/to/glm-modelling-studio")` works too.
+Already have the packages? Then `shiny::runApp("path/to/GLM-App")` works too.
 
 ## Documentation
 
