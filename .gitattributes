@@ -1,0 +1,4 @@
+# keep Windows line endings for the launcher, and treat data and images as binary
+*.bat  text eol=crlf
+*.rds  binary
+*.png  binary

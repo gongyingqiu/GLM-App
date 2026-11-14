@@ -1,0 +1,22 @@
+# Allowlist: everything is ignored unless it is listed below, so model files, client data
+# and deployment credentials can never be committed by accident. Add new files here on purpose.
+*
+
+!.gitignore
+!.gitattributes
+!README.md
+!LICENSE
+!app.R
+!functions.R
+!renv.lock
+!run_app.R
+!run_app.bat
+!App.Rproj
+
+!demo/
+!demo/motor_premiums.rds
+
+!docs/
+!docs/*.md
+!docs/images/
+!docs/images/*.png
