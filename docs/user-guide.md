@@ -81,7 +81,7 @@ separate adjustment for one group of ages.
 
 | System | How |
 |---|---|
-| Windows | Double-click `run_app.bat`. It expects R at `C:\Program Files\R\R-4.4.1`; edit the path at the top of the file if R is installed elsewhere. |
+| Windows | Double-click `run_app.bat`. It finds R 4.4.1 whether it was installed for all users (`C:\Program Files\R`) or just for you (no admin rights needed), and otherwise uses any R on the PATH. |
 | macOS / Linux | In a terminal: `Rscript run_app.R /path/to/GLM-App` |
 | RStudio | Open `App.Rproj` and run `shiny::runApp()` (uses your own installed packages). |
 
@@ -349,7 +349,7 @@ band factors with many levels, to keep models fast.
 
 | Problem | What to do |
 |---|---|
-| `run_app.bat` says R 4.4.1 was not found | Install R 4.4.1, or edit the `RSCRIPT=` line at the top of `run_app.bat` to point at your `Rscript.exe`. |
+| `run_app.bat` says R was not found | Install R 4.4.1. Without admin rights, choose to install it for your user only; the launcher finds it there too. |
 | The first start fails while installing packages | Check the internet connection (the packages come from `packagemanager.posit.co`; one comes from GitHub). Corporate networks may need these sites allowed. |
 | A pop-up says the model cannot be fitted | Read the hints in the pop-up. Common causes: a Gamma response of zero or below, a factor with only one level in the modelling data, or too many parameters. |
 | A factor's relativities look unstable | Check its exposure bars: band sparse levels together, or use a variate or custom groups. |
